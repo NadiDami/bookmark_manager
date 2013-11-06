@@ -2,6 +2,8 @@
 
 ENV['RACK_ENV'] = 'test'
 
+require './server'
+
 require File.join(File.dirname(__FILE__), '..', '..', 'lib/bookmark_manager.rb')
 
 require 'capybara'

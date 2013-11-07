@@ -1,21 +1,19 @@
 require 'spec_helper' 
 
-describe Link do
+describe Link, :type => :feature do
 
-  context "Demonstration of how datamapper works" do
-  
-    it 'should be created and then retrieved from the db' do
-      expect(Link.count).to eq 0
-      Link.create(:title => "Makers Academy",
-                  :url => "http://www.makersacademy.com/")
-      expect(Link.count).to eq 1
-      link = Link.first
-      expect(link.url).to eq("http://www.makersacademy.com/")
-      expect(link.title).to eq("Makers Academy")
-      link.destroy
-      expect(Link.count).to eq 0
-    end
-
+  it 'can be filtered by tags'  do
+    Link.create(:url => "http://www.makersacademy.com",
+                :name => "Makers Academy", 
+                :tags => [Tag.first_or_create(:text => 'education')])
+    Link.create(:url => "http://www.google.com", 
+                :name => "Google", 
+                :tags => [Tag.first_or_create(:text => 'search')])
+     visit '/tags/search'
+    expect(page).not_to have_content("Makers Academy")
+    expect(page).to have_content("Google")
   end
+
+  
 
 end

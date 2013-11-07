@@ -8,9 +8,12 @@
     <header>Bookmark Manager
 
         <a href='/addlink'>Add link</a>
-        <a href='#'>Sign up</a>
+        <a href='/users/new'>Sign up</a>
         <a href='#'>Sign in</a></header>
-    <%= yield %>
+          <% if current_user %>
+    Welcome, <%= current_user.email %>
+  <% end %>
+  <%= yield %>
     <footer>Makers Academy |
       I built this page at Makers Academy</footer>
   </body>

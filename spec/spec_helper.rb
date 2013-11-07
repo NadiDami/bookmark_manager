@@ -6,9 +6,13 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 ENV["RACK_ENV"] = 'test'
 
-require './server' 
+require 'bookmark_manager'
 require 'database_cleaner'
 require 'capybara'
+require 'capybara/rspec'
+require 'sinatra'
+
+Capybara.app = BookmarkManager
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true

@@ -1,0 +1,11 @@
+<ul>
+  <% @links.each do |link| %>
+    <li><a href="<%= link.url %>"><%= link.name %></a></li>
+    <%= link.description %>
+    <% link.tags.each do |tag| %>
+      <a href="/tags/<%= tag.text %>"><%= tag.text %></a>
+      <% end %>
+  <% end %>
+</ul>
+
+Return to <a href="/">homepage</a>

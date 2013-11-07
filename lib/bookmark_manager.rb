@@ -1,12 +1,16 @@
 require 'sinatra/base'
+require 'rack-flash'
 require_relative '../server'
  
 class BookmarkManager < Sinatra::Base
+
+use Rack::Flash
 
 set :views, File.join(File.dirname(__FILE__), '..', 'views')
 
 enable :sessions
 set :session_secret, 'secret_session'
+
 
   get '/' do
     @links = Link.all
@@ -36,16 +40,23 @@ set :session_secret, 'secret_session'
   end
 
   get '/users/new' do
+    @user = User.new
     erb :"users/new"
   end
 
-  post '/users' do
-    user = User.create(:email => params[:email], 
-                :password => params[:password],
-                :password_confirmation => params[:password_confirmation])
-    session[:user_id] = user.id
-    redirect to('/')
-  end
+ post '/users' do
+  @user = User.new(:email => params[:email], 
+              :password => params[:password],
+              :password_confirmation => params[:password_confirmation])  
+  if @user.save
+  session[:user_id] = @user.id
+  redirect to('/')
+else
+  flash[:notice] = "Sorry, your passwords don't match"
+  erb :"users/new"
+end
+
+end
 
 
 helpers do

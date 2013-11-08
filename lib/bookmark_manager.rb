@@ -52,7 +52,7 @@ set :session_secret, 'secret_session'
   session[:user_id] = @user.id
   redirect to('/')
 else
-  flash[:notice] = "Sorry, your passwords don't match"
+  flash.now[:errors] = @user.errors.full_messages
   erb :"users/new"
 end
 

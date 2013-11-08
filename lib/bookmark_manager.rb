@@ -13,6 +13,10 @@ set :session_secret, 'secret_session'
 
 
   get '/' do
+    if session[:logout]
+      flash[:notice] = "Goodbye!"
+      session.clear
+    end
     @links = Link.all
     erb :index
   end
@@ -51,11 +55,32 @@ set :session_secret, 'secret_session'
   if @user.save
   session[:user_id] = @user.id
   redirect to('/')
-else
+  else
   flash.now[:errors] = @user.errors.full_messages
   erb :"users/new"
+  end
 end
 
+get '/sessions/new' do
+  erb :"sessions/new"
+end
+
+post '/sessions' do
+  email, password = params[:email], params[:password]
+  user = User.authenticate(email, password)
+  if user
+    session[:user_id] = user.id
+    redirect to('/')
+  else
+    flash[:errors] = ["The email or password are incorrect"]
+    erb :"sessions/new"
+  end
+end
+
+post '/logout' do
+  session.clear
+  session[:logout] = true
+  redirect to('/')
 end
 
 

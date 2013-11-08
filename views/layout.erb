@@ -9,18 +9,20 @@
 
         <a href='/addlink'>Add link</a>
         <a href='/users/new'>Sign up</a>
-        <a href='#'>Sign in</a></header>
+        <a href='/sessions/new'>Sign in</a></header>
           <% if current_user %>
     Welcome, <%= current_user.email %>
+    <form method="post" action="/logout">
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" value="Sign out">
+    </form>
   <% end %>
-    <% if flash[:errors] && !flash[:errors].empty? %>
-  Sorry, there were the following problems with the form. 
-  <ul id="errors">
-    <% flash[:errors].each do |error| %>
-      <li><%= error %></li>
-    <% end %>
-  </ul>
-<% end %>
+    <% if flash[:notice] %>
+    <div id="notice">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+ 
   <%= yield %>
     <footer>Makers Academy |
       I built this page at Makers Academy</footer>

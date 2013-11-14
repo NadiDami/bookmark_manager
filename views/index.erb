@@ -1,8 +1,10 @@
 <ul id="links-container">
   <% @links.each do |link| %>
     <section class="link">
+      <div class='star hollow'>&#9734;</div>
+      <div class='star solid'>&#9733;</div>
       <li>
-        <a class="title" href="<%= link.url %>"><%= link.name %></a>
+        <a class="title" href="http://<%= link.url %>"><%= link.name %></a>
       </li>
       <section class="description"><%= link.description %></section>
       <% link.tags.each do |tag| %>

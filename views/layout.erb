@@ -9,7 +9,7 @@
   <body>
     <div class = "wrapper">
     <header>
-      <h1 id="logo">Bookmark Manager</h1>
+      <a href="/"><h1 id="logo">Bookmark Manager</h1></a>
       <nav>
         <% if current_user %>
           <a href='/addlink' class="add-link">Add link</a>
@@ -31,12 +31,16 @@
         <input type="submit" value="Sign out">
       </form>
     <% end %>
-    <% if flash[:notice] %>
-      <section id="notice">
-        <%= flash[:notice] %>
-      </section>
-    <% end %>
-    <%= yield %>
+    <section id="flash-container">
+      <% if flash[:notice] %>
+        <section class="flash notice">
+          <%= flash[:notice] %>
+        </section>
+      <% end %>
+    </section>
+    <section id="container">
+      <%= yield %>
+    </section>
     <div class="push"></div>
   </div>
     <footer>
@@ -54,6 +58,7 @@
     </p>
     </footer>
   </div>
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
     <script src="/javascript/application.js"></script>
   </body>
 </html>

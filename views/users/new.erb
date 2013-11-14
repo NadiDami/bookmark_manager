@@ -1,10 +1,12 @@
-<% if flash[:errors] && !flash[:errors].empty? %>
-  <ul id="errors">
-    <% flash[:errors].each do |error| %>
-      <li class="flash error"><%= error %></li>
-    <% end %>
-  </ul>
-<% end %>
+<section id="flash-container">  
+  <% if flash[:errors] && !flash[:errors].empty? %>
+    <ul id="errors">
+      <% flash[:errors].each do |error| %>
+        <li class="flash error"><%= error %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>
 
 <h1>Please sign up:</h1>
 <br>

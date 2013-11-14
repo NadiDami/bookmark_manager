@@ -1,11 +1,15 @@
-<ul>
+<ul id="links-container">
   <% @links.each do |link| %>
-    <li><a href="<%= link.url %>"><%= link.name %></a></li>
-    <%= link.description %>
-    <% link.tags.each do |tag| %>
-      <a href="/tags/<%= tag.text %>"><%= tag.text %></a>
+    <section class="link">
+      <li>
+        <a class="title" href="<%= link.url %>"><%= link.name %></a>
+      </li>
+    <section class="description"><%= link.description %></section>
+      <% link.tags.each do |tag| %>
+        <a href="/tags/<%= tag.text %>"><%= tag.text %></a>
       <% end %>
+    </section>
   <% end %>
 </ul>
 
-Return to <a href="/">homepage</a>
+<p>Return to <a href="/">homepage</a></p>

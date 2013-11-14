@@ -1,7 +1,22 @@
-Please sign in.
+<% if flash[:errors] && !flash[:errors].empty? %>
+  <ul id="errors">
+    <% flash[:errors].each do |error| %>
+      <li class="flash error"><%= error %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h1>Please sign in.</h1>
+<br>
 
 <form method="post" action="/sessions">
-  Email: <input type="text" name="email">
-  Password: <input type="password" name='password'>
-  <input type="submit" value="Sign in">
+  <p>
+    <input type="text" name='email' placeholder="Email address">
+  </p>
+  <p>
+    <input type="password" name='password' placeholder="Password">
+  </p>
+  <p>
+    <input type="submit" value="Sign in" class="button">
+  </p>
 </form>

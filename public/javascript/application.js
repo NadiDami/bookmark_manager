@@ -22,8 +22,8 @@ function addFavouritesHandler() {
   });
 }
 
-function prepareNewLinkHandler() {
-  $('.add-link').click(function(event) {
+function prepareRemoteFormsHandler() {
+  $('.add-link, .new-user, .new-session').click(function(event) {
     $.get($(this).attr("href"), function(data) {
       if ($('#ajax-form').length == 0) {
         $("#container").prepend("<div id='ajax-form'></div>");
@@ -37,7 +37,7 @@ function prepareNewLinkHandler() {
 
 $(function() {
   addFavouritesHandler();
-  prepareNewLinkHandler();
+  prepareRemoteFormsHandler();
 })
 
 

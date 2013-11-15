@@ -45,7 +45,7 @@ set :session_secret, 'secret_session'
 
   get '/users/new' do
     @user = User.new
-    erb :"users/new"
+    erb :"users/new", :layout => !request.xhr?
   end
 
  post '/users' do
@@ -62,7 +62,7 @@ set :session_secret, 'secret_session'
 end
 
 get '/sessions/new' do
-  erb :"sessions/new"
+  erb :"sessions/new", :layout => !request.xhr?
 end
 
 post '/sessions' do

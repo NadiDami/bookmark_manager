@@ -22,7 +22,7 @@ set :session_secret, 'secret_session'
   end
 
   get '/addlink' do
-    erb :add_link
+    erb :add_link, :layout => !request.xhr?
   end
 
   post '/addlink' do
